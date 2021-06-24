@@ -1,0 +1,57 @@
+#### ATIVIDADE AULA 2 ####
+
+1) Instalar o InfluxDB:
+
+# Criando o diretório para persistir o volume e as configurações
+$ mkdir -p $PWD/volumes/influxdb
+
+$ Instalando o INFLUXDB:
+$ docker run -d -v "$PWD/volumes/influxdb:/var/lib/influxdb"    \
+    -p 8083:8083                                                \
+    -p 8086:8086                                                \
+    -p 25826:25826/udp                                          \
+    --name=influxdb                                             \
+    --network=grafana-net                                       \
+    influxdb:1.0
+	
+2) Instalar o coletor de métricas Telegraf:
+
+$wget -qO- https://repos.influxdata.com/influxdb.key | sudo apt-key add -
+$source /etc/lsb-release
+$echo "deb https://repos.influxdata.com/${DISTRIB_ID,,} \
+    ${DISTRIB_CODENAME} stable" |                   \
+    sudo tee /etc/apt/sources.list.d/influxdb.list
+$sudo apt-get update && sudo apt-get install telegraf
+$sudo service telegraf start
+
+3) Visualizando as métricas coletadas pelo Telegraf no InfluxDB:
+
+# Conectando no Influx
+$ docker exec -ti influxdb bash
+$ influx
+
+# Acessando as métricas
+> use telegraf
+> show measurements;
+> exit
+$ exit
+
+4) Configurar o data source no Grafana:
+
+Configuration > Data Sources > Add data source > InfluxDB
+Name: InfluxDB
+URL: http://192.168.33.10:8086
+Access: Browser
+Database: telegraf
+Save & Test
+
+5) Ler a primeira métrica em um dashboard:
+
+Create > Dashboard > Configurações
+General > Name: Aula 2 - Como armazenar as métricas
+Variables > Type: Query
+Variables > Name: server
+Variables > Type: Query
+Variables > Data source: InfluxDB
+Variables > Query: SHOW TAG VALUES FROM system WITH KEY=host
+New Panel > Add Query
