@@ -1,0 +1,6 @@
+#### VAGRANT ####
+
+vagrant version
+vagrant up
+vagrant status
+vagrant ssh

@@ -1,0 +1,59 @@
+#### ATIVIDADE AULA 1 ####
+
+https://cursos.alura.com.br/course/grafana-telegraf-monitoramento/task/62107
+
+1) Copiar o arquivo do vagrant para um diretorio
+
+2) Comando: vagrant up
+
+3) Comando: vagrant ssh
+
+4) Atualizar o sistema: sudo apt-get update && sudo apt-get upgrade -y
+
+5) Instalar o Docker:
+
+# Download do script
+$ curl -fsSL https://get.docker.com -o get-docker.sh 
+
+# Instalando
+$ sh get-docker.sh 
+
+# Dando permissão para o usuário
+$ sudo usermod -aG docker vagrant 
+
+# Recarregando as permissões
+$ exit
+$ vagrant ssh
+
+# Testando a instalação
+$ docker ps
+
+6) Instalar o Grafana:
+
+# Criando o diretorio para a instalação do Grafana
+$ mkdir -p  $PWD/grafana-alura/volumes/grafana
+$ cd $PWD/grafana-alura/
+
+# Criando a rede do docker para o grafana
+$ docker network create grafana-net
+
+# Definindo a instalação do grafana para o user atual e instalando
+$ ID=$(id -u)
+$ docker run -d --user $ID                  \
+    -v "$PWD/volumes/grafana:/var/lib/graf  \
+    -p 3000:3000                            \
+    --name=grafana                          \
+    --network=grafana-net                   \
+    grafana/grafana
+$ docker ps
+
+7) Acessar o Grafana: http://192.168.33.10/3000
+
+Usuário: admin
+Senha: admin
+Nova senha: mestre
+8) Criar o primeiro dashboard:
+
+Create -> Dashboard -> Add Query
+Visualization -> Mostrar os tipos de visualizações mais comuns
+Criar um gráfico, gauge, bar gauge e table (Nome: Aula1 - Meu primeiro dashboard)
