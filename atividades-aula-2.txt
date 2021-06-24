@@ -17,6 +17,10 @@ $ docker run -d -v "$PWD/volumes/influxdb:/var/lib/influxdb"    \
 2) Instalar o coletor de métricas Telegraf:
 
 $wget -qO- https://repos.influxdata.com/influxdb.key | sudo apt-key add -
+O comando acima não estava funcionando. Tive que usar os comandos abaixo:
+curl -o influxdb.key https://repos.influxdata.com/influxdb.key
+sudo apt-key add influxdb.key
+
 $source /etc/lsb-release
 $echo "deb https://repos.influxdata.com/${DISTRIB_ID,,} \
     ${DISTRIB_CODENAME} stable" |                   \
