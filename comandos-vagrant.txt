@@ -1,6 +1,14 @@
 #### VAGRANT ####
 
+Pasta da instalação:
+C:\HashiCorp\Vagrant\bin
+
+Comandos:
 vagrant version
 vagrant up
 vagrant status
 vagrant ssh
+
+Docs:
+- aumentar timeout
+https://www.vagrantup.com/docs/vagrantfile/machine_settings#config-vm-boot_timeout
