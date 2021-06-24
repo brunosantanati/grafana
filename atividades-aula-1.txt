@@ -40,7 +40,7 @@ $ docker network create grafana-net
 # Definindo a instalação do grafana para o user atual e instalando
 $ ID=$(id -u)
 $ docker run -d --user $ID                  \
-    -v "$PWD/volumes/grafana:/var/lib/graf  \
+    -v $PWD/volumes/grafana:/var/lib/graf  \
     -p 3000:3000                            \
     --name=grafana                          \
     --network=grafana-net                   \
