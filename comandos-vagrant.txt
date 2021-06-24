@@ -8,6 +8,7 @@ vagrant version
 vagrant up
 vagrant status
 vagrant ssh
+vagrant halt
 
 Docs:
 - aumentar timeout
