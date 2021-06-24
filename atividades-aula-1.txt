@@ -47,11 +47,12 @@ $ docker run -d --user $ID                  \
     grafana/grafana
 $ docker ps
 
-7) Acessar o Grafana: http://192.168.33.10/3000
+7) Acessar o Grafana: http://192.168.33.10:3000
 
 Usuário: admin
 Senha: admin
 Nova senha: mestre
+
 8) Criar o primeiro dashboard:
 
 Create -> Dashboard -> Add Query
